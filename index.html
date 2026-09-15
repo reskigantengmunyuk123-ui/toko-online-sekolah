@@ -1,36 +1,598 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Toko Online Sekolah</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koperasi Siswa &mdash; Kebutuhan Sekolahmu, Lengkap di Sini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF9F5;
+    --paper-alt: #F1EEE3;
+    --ink: #17233D;
+    --ink-soft: #4B5768;
+    --marigold: #F2A63D;
+    --marigold-dark: #D98C22;
+    --pine: #2F6F5E;
+    --coral: #E85D4B;
+    --line: #DED7C4;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Baloo 2', sans-serif;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .section { padding: 84px 0; }
+  .section--alt { background: var(--paper-alt); }
+
+  .eyebrow-free-heading { max-width: 560px; }
+  .section h2 {
+    font-size: clamp(1.7rem, 1.3rem + 1.5vw, 2.3rem);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .section .section-lede {
+    color: var(--ink-soft);
+    max-width: 520px;
+    font-size: 1.05rem;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--pine);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 249, 245, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+  .brand-mark { width: 34px; height: 34px; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--ink);
+    color: var(--paper) !important;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--pine); }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.1rem);
+    font-weight: 800;
+    line-height: 1.18;
+    max-width: 15ch;
+  }
+  .hero p {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 1.1rem;
+    max-width: 42ch;
+  }
+  .hero-actions {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--marigold);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 14px 26px;
+    border-radius: var(--radius);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--marigold-dark); transform: translateY(-1px); }
+  .hero-actions .text-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--pine);
+    border-bottom: 2px solid transparent;
+  }
+  .hero-actions .text-link:hover { border-bottom-color: var(--pine); }
+
+  .hero-art { width: 100%; }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 0;
+  }
+  .stats .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .stat {
+    flex: 1 1 200px;
+    padding: 6px 28px;
+    border-left: 2px solid rgba(250,249,245,0.25);
+  }
+  .stat:first-child { border-left: none; padding-left: 0; }
+  .stat strong {
+    display: block;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.7rem;
+    color: var(--marigold);
+  }
+  .stat span {
+    color: rgba(250,249,245,0.75);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Category cards ---------- */
+  .cat-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .cat-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 30px 22px 24px;
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+  }
+  .cat-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 26px; height: 26px;
+    background: var(--accent, var(--marigold));
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+  .cat-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .cat-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Why section ---------- */
+  .why-list {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .why-item svg {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 16px;
+  }
+  .why-item h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .why-item p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+
+  /* ---------- Hours / location ---------- */
+  .hours-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .hours-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .hours-list li:first-child { padding-top: 0; }
+  .hours-list span:first-child { color: var(--ink-soft); }
+  .hours-list span:last-child { font-weight: 600; }
+
+  .location-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .location-card svg { width: 30px; height: 30px; margin-bottom: 14px; color: var(--pine); }
+  .location-card p { margin: 0 0 6px; color: var(--ink-soft); }
+  .location-note {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    background: var(--pine);
+    color: var(--paper);
+    padding: 70px 0;
+    text-align: left;
+  }
+  .cta-band .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .cta-band h2 {
+    color: var(--paper);
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    max-width: 16ch;
+  }
+  .cta-band .btn-primary { flex-shrink: 0; }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: var(--ink);
+    color: rgba(250,249,245,0.7);
+    padding: 44px 0 30px;
+  }
+  .footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer .brand { color: var(--paper); }
+  .footer-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-links a { text-decoration: none; color: rgba(250,249,245,0.7); }
+  .footer-links a:hover { color: var(--paper); }
+  .footer-bottom {
+    margin-top: 24px;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(250,249,245,0.15);
+    padding-top: 20px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero .container { grid-template-columns: 1fr; }
+    .hero-art { order: -1; max-width: 320px; margin: 0 auto; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-list { grid-template-columns: 1fr; gap: 28px; }
+    .hours-grid { grid-template-columns: 1fr; gap: 30px; }
+  }
+
+  @media (max-width: 780px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 76px;
+      left: 0;
+      right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 32px 28px;
+      gap: 18px;
+    }
+    .nav-links.is-open { display: flex; }
+    .nav-toggle { display: flex; }
+  }
+
+  @media (max-width: 560px) {
+    .cat-grid { grid-template-columns: 1fr; }
+    .stat { border-left: none; padding-left: 0; }
+    .cta-band .container { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
 </head>
 <body>
-    <!-- BAGIAN 1: NAVBAR (Dibuat oleh Resky) -->
-    <nav style="background-color: #007bff; color: white; padding: 15px; text-align: center;"><h1>Logo Toko Sekolah</h1></nav>
 
-    <!-- BAGIAN 2: DAFTAR PRODUK (Tugas Gilar) -->
-    <section id="produk" style="padding: 20px; background-color: #f9f9f9; text-align: center;">
-        <h2 style="color: #333;">Toko Online Sekolah</h2>
-        <p>Penuhi kebutuhan belajar Anda dengan produk berkualitas kami:</p>
-        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; width: 200px;">
-                <h3>Buku Tulis</h3>
-                <p style="color: green; font-weight: bold;">Rp 5.000</p>
-                <button style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px;">Beli</button>
-            </div>
-            <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; width: 200px;">
-                <h3>Pulpen Gel</h3>
-                <p style="color: green; font-weight: bold;">Rp 3.000</p>
-                <button style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px;">Beli</button>
-            </div>
-            <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; width: 200px;">
-                <h3>Tas Ransel</h3>
-                <p style="color: green; font-weight: bold;">Rp 85.000</p>
-                <button style="background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px;">Beli</button>
-            </div>
+<header class="nav">
+  <div class="container">
+    <a href="#beranda" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="6" width="28" height="28" rx="5" fill="#F2A63D"/>
+        <path d="M13 14H27M13 20H27M13 26H21" stroke="#17233D" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Kopsis
+    </a>
+    <ul class="nav-links">
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#why">Keuntungan</a></li>
+      <li><a href="#lokasi">Lokasi</a></li>
+      <li><a href="#kontak" class="nav-cta">Hubungi Kami</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="beranda">
+    <div class="container">
+      <div>
+        <h1>Kebutuhan sekolahmu, lengkap di koperasi kita sendiri.</h1>
+        <p>Dari alat tulis sampai seragam, beli di koperasi dan untungnya kembali lagi ke sekolah kita, bukan ke toko luar.</p>
+        <div class="hero-actions">
+          <a href="#produk" class="btn-primary">Lihat Daftar Produk</a>
+          <a href="#keanggotaan" class="text-link">Cara jadi anggota</a>
         </div>
-    </section>
+      </div>
+      <svg class="hero-art" viewBox="0 0 420 380" fill="none">
+        <ellipse cx="220" cy="200" rx="175" ry="150" transform="rotate(-6 220 200)" fill="#FBEBD2"/>
+        <g transform="translate(90,110) rotate(-6)">
+          <rect x="0" y="0" width="150" height="190" rx="8" fill="#FFFFFF" stroke="#17233D" stroke-width="3"/>
+          <rect x="24" y="20" width="66" height="10" rx="5" fill="#2F6F5E"/>
+          <line x1="24" y1="52" x2="126" y2="52" stroke="#DED7C4" stroke-width="3"/>
+          <line x1="24" y1="74" x2="126" y2="74" stroke="#DED7C4" stroke-width="3"/>
+          <line x1="24" y1="96" x2="126" y2="96" stroke="#DED7C4" stroke-width="3"/>
+          <line x1="24" y1="118" x2="100" y2="118" stroke="#DED7C4" stroke-width="3"/>
+          <circle cx="0" cy="24" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+          <circle cx="0" cy="52" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+          <circle cx="0" cy="80" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+          <circle cx="0" cy="108" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+          <circle cx="0" cy="136" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+          <circle cx="0" cy="164" r="5" fill="none" stroke="#17233D" stroke-width="3"/>
+        </g>
+        <g transform="translate(248,70) rotate(35)">
+          <rect x="0" y="-14" width="18" height="14" rx="3" fill="#E85D4B"/>
+          <rect x="0" y="0" width="18" height="128" fill="#F2A63D"/>
+          <polygon points="0,128 18,128 9,152" fill="#E8C08A"/>
+          <polygon points="5,144 13,144 9,155" fill="#3B2A20"/>
+        </g>
+        <g transform="translate(255,235)">
+          <path d="M0 0 L48 0 L42 74 L6 74 Z" fill="#FFFFFF" stroke="#17233D" stroke-width="3"/>
+          <rect x="20" y="-20" width="6" height="26" rx="3" fill="#2F6F5E"/>
+          <line x1="4" y1="20" x2="44" y2="20" stroke="#DED7C4" stroke-width="2"/>
+        </g>
+      </svg>
+    </div>
+  </section>
 
-    <!-- BAGIAN 3: KONTAK & FOOTER (Tugas Zaenal) -->
-    <!-- Zaenal akan mengisi kodenya di bawah sini nanti -->
+  <section class="stats">
+    <div class="container">
+      <div class="stat">
+        <strong>120+</strong>
+        <span>Anggota aktif</span>
+      </div>
+      <div class="stat">
+        <strong>15+</strong>
+        <span>Kategori produk</span>
+      </div>
+      <div class="stat">
+        <strong>2015</strong>
+        <span>Berdiri sejak tahun</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="produk">
+    <div class="container">
+      <div class="eyebrow-free-heading">
+        <h2>Kategori produk yang tersedia</h2>
+        <p class="section-lede">Semua ada di satu tempat, jadi tidak perlu jauh-jauh keluar sekolah.</p>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" style="--accent:#F2A63D">
+          <h3>Alat Tulis</h3>
+          <p>Pensil, pulpen, buku tulis, penggaris, dan perlengkapan belajar sehari-hari.</p>
+        </div>
+        <div class="cat-card" style="--accent:#2F6F5E">
+          <h3>Seragam & Atribut</h3>
+          <p>Seragam, dasi, badge, dan atribut resmi sekolah sesuai ketentuan.</p>
+        </div>
+        <div class="cat-card" style="--accent:#E85D4B">
+          <h3>Jajanan & Minuman</h3>
+          <p>Camilan dan minuman untuk jam istirahat, dengan harga bersahabat.</p>
+        </div>
+        <div class="cat-card" style="--accent:#17233D">
+          <h3>Buku & LKS</h3>
+          <p>Buku pelajaran, LKS, dan alat tulis khusus untuk ujian dan tugas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="why">
+    <div class="container">
+      <div class="eyebrow-free-heading">
+        <h2>Kenapa belanja di koperasi kita</h2>
+        <p class="section-lede">Bukan sekadar toko, koperasi ini milik dan untuk warga sekolah sendiri.</p>
+      </div>
+      <div class="why-list">
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2F6F5E" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+          <h3>Harga bersahabat</h3>
+          <p>Harga ditentukan seadil mungkin, disesuaikan dengan kemampuan siswa.</p>
+        </div>
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2F6F5E" stroke-width="1.8"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+          <h3>Untungnya kembali ke sekolah</h3>
+          <p>Sisa hasil usaha (SHU) dibagikan untuk kegiatan sekolah dan anggota.</p>
+        </div>
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2F6F5E" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M13 20c0-2.5 2-4.5 5-4.5s5 2 5 4.5"/></svg>
+          <h3>Dikelola bersama</h3>
+          <p>Dijalankan oleh siswa dan guru, jadi kita belajar berorganisasi sambil belanja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lokasi">
+    <div class="container">
+      <div class="eyebrow-free-heading">
+        <h2>Jam buka dan lokasi</h2>
+        <p class="section-lede">Mampir kapan saja selama jam operasional berikut.</p>
+      </div>
+      <div class="hours-grid">
+        <ul class="hours-list">
+          <li><span>Senin &ndash; Kamis</span><span>07.00 &ndash; 14.00</span></li>
+          <li><span>Jumat</span><span>07.00 &ndash; 11.00</span></li>
+          <li><span>Sabtu</span><span>07.00 &ndash; 12.00</span></li>
+          <li><span>Minggu</span><span>Tutup</span></li>
+        </ul>
+        <div class="location-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <p><strong>Gedung Koperasi Siswa</strong></p>
+          <p>Lantai 1, sebelah kantin sekolah</p>
+          <p>Jl. Pendidikan No. 1</p>
+          <p class="location-note">Ganti alamat ini dengan lokasi koperasi sekolahmu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="keanggotaan">
+    <div class="container">
+      <h2>Yuk, jadi bagian dari koperasi</h2>
+      <a href="#kontak" class="btn-primary">Hubungi Pengurus Koperasi</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="kontak">
+  <div class="container">
+    <a href="#beranda" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="6" width="28" height="28" rx="5" fill="#F2A63D"/>
+        <path d="M13 14H27M13 20H27M13 26H21" stroke="#17233D" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Kopsis
+    </a>
+    <ul class="footer-links">
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#why">Keuntungan</a></li>
+      <li><a href="#lokasi">Lokasi</a></li>
+    </ul>
+  </div>
+  <div class="container footer-bottom">
+    &copy; 2026 Koperasi Siswa. Dibuat dengan bangga oleh warga sekolah.
+  </div>
+</footer>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+</script>
+
 </body>
 </html>
