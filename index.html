@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Koperasi Siswa — Kebutuhan Sekolahmu, Lengkap di Sini</title>
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6;">
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;">
 
-    <!-- ======================================================== -->
-    <!-- BAGIAN 1: NAVBAR & HERO SECTION (Dibuat oleh Resky)      -->
-    <!-- ======================================================== -->
+    <!-- NAVBAR -->
     <nav style="background-color: #007bff; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         <h2 style="margin: 0; font-weight: bold; letter-spacing: 1px;">Kopsis</h2>
         <div>
             <a href="index.html" style="color: white; margin-right: 20px; text-decoration: none; font-weight: bold; border-bottom: 2px solid white; padding-bottom: 5px;">Beranda</a>
-            <a href="produk.html" style="color: white; margin-right: 20px; text-decoration: none; transition: 0.3s;">Produk</a>
-            <a href="kontak.html" style="color: white; text-decoration: none; transition: 0.3s;">Hubungi Kami</a>
+            <a href="produk.html" style="color: white; margin-right: 20px; text-decoration: none;">Produk</a>
+            <a href="kontak.html" style="color: white; text-decoration: none;">Hubungi Kami</a>
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header style="padding: 80px 20px; text-align: center; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);">
         <h1 style="font-size: 2.5rem; margin-bottom: 15px; color: #111;">Kebutuhan sekolahmu, lengkap di koperasi kita sendiri.</h1>
         <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px auto; color: #555;">Dari alat tulis sampai seragam, beli di koperasi dan untungnya kembali lagi ke sekolah kita, bukan ke toko luar.</p>
@@ -27,12 +26,40 @@
             <a href="#tentang" style="display: inline-block; background-color: transparent; color: #007bff; border: 2px solid #007bff; padding: 10px 23px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1rem; margin-left: 15px; transition: 0.3s;">Pelajari Selengkapnya</a>
         </div>
         
-        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 50px;">
+        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 50px; flex-wrap: wrap;">
             <div><h3 style="margin: 0; font-size: 2rem; color: #007bff;">120+</h3><p style="margin: 5px 0 0 0; color: #666;">Anggota Aktif</p></div>
             <div><h3 style="margin: 0; font-size: 2rem; color: #007bff;">15+</h3><p style="margin: 5px 0 0 0; color: #666;">Kategori Produk</p></div>
             <div><h3 style="margin: 0; font-size: 2rem; color: #007bff;">2015</h3><p style="margin: 5px 0 0 0; color: #666;">Berdiri Sejak</p></div>
         </div>
     </header>
+
+    <!-- BAGIAN TENTANG KOPERASI -->
+    <section id="tentang" style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #111; font-size: 2rem; margin-bottom: 20px;">Tentang Koperasi Siswa</h2>
+        <p style="text-align: center; color: #666; max-width: 800px; margin: 0 auto 40px auto; font-size: 1.05rem;">
+            Koperasi Siswa dibentuk untuk menyediakan sarana penunjang kegiatan belajar mengajar siswa. Seluruh keuntungan penjualan akan dikelola kembali demi kesejahteraan dan kegiatan para siswa di sekolah.
+        </p>
+
+        <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px; background: #f8f9fa; padding: 25px; border-radius: 8px; border: 1px solid #e9ecef;">
+                <h3 style="color: #007bff; margin-top: 0;">Harga Terjangkau</h3>
+                <p style="color: #555; margin-bottom: 0;">Semua produk yang kami jual dipastikan ramah untuk kantong pelajar.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background: #f8f9fa; padding: 25px; border-radius: 8px; border: 1px solid #e9ecef;">
+                <h3 style="color: #007bff; margin-top: 0;">Lengkap & Praktis</h3>
+                <p style="color: #555; margin-bottom: 0;">Segala kebutuhan alat tulis, atribut seragam, hingga konsumsi harian tersedia di satu tempat.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background: #f8f9fa; padding: 25px; border-radius: 8px; border: 1px solid #e9ecef;">
+                <h3 style="color: #007bff; margin-top: 0;">Dari & Untuk Siswa</h3>
+                <p style="color: #555; margin-bottom: 0;">Pengelolaan dilakukan bersama secara transparan untuk melatih jiwa kewirausahaan siswa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background-color: #172033; color: white; text-align: center; padding: 25px 20px; margin-top: auto;">
+        <p style="margin: 0; font-size: 0.95rem;">&copy; 2026 Koperasi Siswa. Seluruh hak cipta dilindungi.</p>
+    </footer>
 
 </body>
 </html>
